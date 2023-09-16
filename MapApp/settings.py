@@ -25,6 +25,7 @@ SECRET_KEY = 'django-insecure-nu)56exd34#j3nor3$$9$j2iz-1%2dd&m%us@s3y7o!rmz*%&#
 DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
+AUTH_USER_MODEL = 'student.Student'
 
 # Application definition
 
@@ -36,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'users',
+    'student',
     'rest_framework.authtoken',
 
 ]
@@ -55,6 +56,11 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ]
 }
+AUTHENTICATION_BACKENDS = [
+    'student.custom_auth_backend.EmailBackend',  # Use your custom email-based backend
+    # ... other backends ...
+]
+
 ROOT_URLCONF = 'MapApp.urls'
 
 TEMPLATES = [
