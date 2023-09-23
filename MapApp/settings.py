@@ -58,6 +58,7 @@ REST_FRAMEWORK = {
     ]
 }
 AUTHENTICATION_BACKENDS = [
+     ('django.contrib.auth.backends.ModelBackend'),
     'student.custom_auth_backend.EmailBackend',  # Use your custom email-based backend
     # ... other backends ...
 ]

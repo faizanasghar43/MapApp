@@ -30,7 +30,6 @@ class StudentViewSet(viewsets.ModelViewSet):
     queryset = Student.objects.filter(is_student=True)
     serializer_class = StudentSerializer
     def get_permissions(self):
-        # Allow unauthenticated users to create students (POST request)
         if self.action == 'create':
             return []
         return [permissions.IsAuthenticated()]

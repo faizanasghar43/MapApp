@@ -11,7 +11,7 @@ class User(AbstractUser):
     is_student = models.BooleanField(default=False)
     created_at = models.DateTimeField(default=timezone.now)
     updated_at = models.DateTimeField(auto_now=True)
-    
+
 
 class Student(User):
     """Extend the User model for students and other users."""
