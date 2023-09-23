@@ -15,7 +15,8 @@ class StudentSerializer(serializers.ModelSerializer):
             email=validated_data['email'],
             name=validated_data['name'],
             roll_number=validated_data['roll_number'],
-            username=username  # Set the generated username
+            username=username,  # Set the generated username
+            is_student = True
         )
         student.set_password(validated_data['password'])
         student.save()
