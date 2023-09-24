@@ -6,6 +6,9 @@ from rest_framework import status
 import datetime
 
 from .models import Student
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 def login_employee(request, format=None):
     email = request.data.get("email")
@@ -21,20 +24,19 @@ def login_employee_using_email_password(email, password, throw_exception=True, i
     if password is None:
         raise ValidationError('Password should not be empty')
     try:
-        student = Student.objects.get(email=email)
-        print(f"user:{student}")
-        print(email, password)
-    except Student.DoesNotExist:
+        user = User.objects.get(email=email)
+        student = Student.objects.get(user=user)
+        user = authenticate(request=None, email=email, password=password)  # Use the custom authenticate function
+        if user is not None:
+            data = get_access_and_refresh_token_for_employee(user)
+            return data
+        else:
+            if throw_exception:
+                raise ValidationError('Invalid login credentials')
+    except User.DoesNotExist or Student.DoesNotExist:
         raise ValidationError('Student does not exist')
 
-    user = authenticate(request=None, email=email, password=password)  # Use the custom authenticate function
-    print(user)
-    if user is not None:
-        data = get_access_and_refresh_token_for_employee(user)
-        return data
-    else:
-        if throw_exception:
-            raise ValidationError('Invalid login credentials')
+
     return False
 
 

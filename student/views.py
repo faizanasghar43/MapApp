@@ -27,7 +27,7 @@ class RegisterUser(ObtainAuthToken):
         })
 
 class StudentViewSet(viewsets.ModelViewSet):
-    queryset = Student.objects.filter(is_student=True)
+    queryset = Student.objects.all()
     serializer_class = StudentSerializer
     def get_permissions(self):
         if self.action == 'create':
