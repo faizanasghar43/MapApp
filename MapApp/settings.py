@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'django_extensions',
     'student',
     'rest_framework.authtoken',
 
@@ -57,6 +58,7 @@ REST_FRAMEWORK = {
     ]
 }
 AUTHENTICATION_BACKENDS = [
+     ('django.contrib.auth.backends.ModelBackend'),
     'student.custom_auth_backend.EmailBackend',  # Use your custom email-based backend
     # ... other backends ...
 ]
@@ -129,3 +131,4 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+AUTH_USER_MODEL = 'student.User'

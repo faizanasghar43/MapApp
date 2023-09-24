@@ -25,7 +25,7 @@ def login_employee_using_email_password(email, password, throw_exception=True, i
         print(f"user:{student}")
         print(email, password)
     except Student.DoesNotExist:
-        raise ValidationError('Employee does not exist')
+        raise ValidationError('Student does not exist')
 
     user = authenticate(request=None, email=email, password=password)  # Use the custom authenticate function
     print(user)
